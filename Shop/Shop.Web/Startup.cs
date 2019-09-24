@@ -29,10 +29,12 @@ namespace Shop.Web
 
             services.AddDbContext<DataContext>(cfg =>
             {
-                cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));//coneccion a la base
             });
 
-            services.AddTransient<SeedDb>();
+            services.AddTransient<SeedDb>();// tiene un ciclo de vida mas corto
+
+            services.AddScoped<IRepository, Repository>();// la inyeccion queda permanente
 
             services.Configure<CookiePolicyOptions>(options =>
             {
